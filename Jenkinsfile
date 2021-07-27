@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        ansiColor('xterm')
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -14,7 +18,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh '''docker compose up -d'''
+                sh '''docker compose up -D'''
             }
         }
     }

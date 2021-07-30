@@ -20,6 +20,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'docker-compose up'
+                sshagent (credentials: ['jenkins-key']) {
+                    sh 'git tag MAIN-1.0.${BUILD_NUMBER}'
+                    sh 'git push --tags'
+                }
             }
         }
     }

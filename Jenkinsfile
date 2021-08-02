@@ -14,7 +14,10 @@ pipeline {
         }
         stage('Test') {
             steps {
+                echo 'Testing...'
                 sh '''docker image tag hello-gradle:latest hello-gradle:MAIN-1.0.${BUILD_NUMBER}-${GIT_COMMIT}'''
+                junit 'build/test-results/test/TEST-*.xml'
+
             }
         }
         stage('Deploy') {
